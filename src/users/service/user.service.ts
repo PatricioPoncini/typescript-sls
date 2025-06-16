@@ -1,10 +1,11 @@
 import { UserRepository } from "../entity/user.repository";
 import {inject, injectable} from "inversify";
+import {injectionToken} from "../../types/constants";
 
 @injectable()
 export class UserService {
     constructor(
-        @inject('USER_REPO') // TODO: usar un enum o const
+        @inject(injectionToken.USER_REPO)
         private readonly userRepository: UserRepository
     ) {}
 
