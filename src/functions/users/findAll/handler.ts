@@ -1,18 +1,11 @@
 import {formatJSONResponse} from "@libs/api-gateway";
-import {APIGatewayProxyEvent, Context} from "aws-lambda";
+import {UserService} from "../../../users/service/user.service";
+import {container} from "../../../config/inversify.config";
 
-// event --> contiene la estructura base de lo que podemos ejecutar por la req, puede tener el body, parametros, query params --> https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
-// context --> información en la cual se esta ejecutando la req --> https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html
-const findAll = async (event: APIGatewayProxyEvent, context: Context) => {
-    const { name } = JSON.parse(event.body) as { name: string };
-    const { awsRequestId } = context;
+export const main = async () => {
+    const userService = container.get(UserService);
 
     return formatJSONResponse({
-        message: `Hello ${name}!`,
-        awsRequestId,
-        // event,
-        // context
+        users: userService.findAll()
     })
 }
-
-export const main = findAll;

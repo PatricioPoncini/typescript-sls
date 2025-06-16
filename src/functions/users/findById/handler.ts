@@ -1,14 +1,13 @@
 import {formatJSONResponse} from "@libs/api-gateway";
-import {APIGatewayProxyEvent, Context} from "aws-lambda";
+import {APIGatewayProxyEvent} from "aws-lambda";
+import {UserService} from "../../../users/service/user.service";
+import {container} from "../../../config/inversify.config";
 
-const findById = async (event: APIGatewayProxyEvent, context: Context) => {
-    const { awsRequestId } = context;
-    const { id } = event.pathParameters; // obtiene el valor del param
-    const { age } = event.queryStringParameters; // obtiene el valor de la query
+export const main = async (event: APIGatewayProxyEvent) => {
+    const { id } = event.pathParameters;
+    const userService = container.get(UserService);
+
     return formatJSONResponse({
-        message: `Hi! You requested information for user ID: ${id}. This user is ${age} years old.`,
-        awsRequestId,
+        user: userService.findById(id)
     })
 }
-
-export const main = findById;

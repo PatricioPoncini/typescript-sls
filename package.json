@@ -12,7 +12,10 @@
   "dependencies": {
     "@middy/core": "^3.4.0",
     "@middy/http-json-body-parser": "^3.4.0",
-    "@serverless/typescript": "^4.15.1"
+    "@serverless/typescript": "^4.15.1",
+    "inversify": "^7.5.2",
+    "inversify-binding-decorators": "^4.0.0",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.119",
