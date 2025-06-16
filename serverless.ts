@@ -5,9 +5,10 @@ import hello from '@functions/hello';
 const serverlessConfiguration: AWS = {
   service: 'serverless',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  plugins: ['serverless-esbuild', 'serverless-offline'],
   provider: {
     name: 'aws',
+    region: 'sa-east-1',
     runtime: 'nodejs14.x',
     apiGateway: {
       minimumCompressionSize: 1024,
